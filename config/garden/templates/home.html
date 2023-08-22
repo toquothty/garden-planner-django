@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+
+<div class="container">
+    <h1 class="cover-heading">Virginia Garden Planner Application</h1>
+    <br>
+    <h3>This web app is designed to make getting planting information for various vegetables in Zone 7A
+        easier! In the view of vegetables you can click on the button to go see further planting details.</h3>
+    <br>
+    <p class="lead">
+        <a href="{{ url_for('display_vegetables') }}" class="btn btn-lg btn-secondary">Click here to view list
+            of
+            vegetables</a>
+    </p>
+    <p class="lead">If you have any questions or feature requests, please contact me through a method in the
+        footer!
+
+</div>
+
+
+
+{% endblock %}

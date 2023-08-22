@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<section class="container">
+    <h1>Things to do today!</h1>
+    <hr>
+</section>
+
+<section class="flex-container">
+    {% for key, value in tasks.items() %}
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="card border border-dark">
+            {% if value == "Direct" %}
+            <a href="/list/{{ key }}" class="btn btn-secondary" role="button"> {{ key }} can be Direct Sown Today
+            </a>
+            {% elif value == "Transplant" %}
+            <a href="/list/{{ key }}" class="btn btn-secondary" role="button"> {{ key }} can be Transplanted Today
+            </a>
+            {% elif value == "Harvest" %}
+            <a href="/list/{{ key }}" class="btn btn-secondary" role="button"> {{ key }} can be Harvested Today
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+
+
+{% endblock %}

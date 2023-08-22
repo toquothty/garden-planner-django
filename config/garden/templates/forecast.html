@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<section class="container">
+    <h1>Forecast</h1>
+    <hr>
+</section>
+<section class="flex-container">
+    <div class="row">
+        {% for item in time_period %}
+        <div class="col-lg-3 col-sm-4">
+            <div class="card h-100 border border-dark rounded">
+                <img class="card-image" src={{temp_icon[loop.index0]}}>
+                </img>
+                <div class="card-body">
+                    <h2>{{item}}, {{temperature[loop.index0]}} F</h2>
+                    <p class="card-text">{{forecast[loop.index0]}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
