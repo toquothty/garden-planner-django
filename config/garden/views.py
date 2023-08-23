@@ -6,4 +6,10 @@ def home(request):
     return render(request, "base.html")
 
 def list(request):
-    return HttpResponse("this is a vegetable")
+    return render(request, "list.html")
+
+def forecast(request):
+    return render(request, "forecast.html")
+
+def todays_tasks(request):
+    return render(request, "todays-tasks")
