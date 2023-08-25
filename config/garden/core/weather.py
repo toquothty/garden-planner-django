@@ -6,11 +6,6 @@ api_url = "https://api.weather.gov/gridpoints/AKQ/40,73/forecast"
 
 
 def weather():
-    # Call to NWS for weather data local to Chesterfield
-    # time_period = [] Unused in the django version
-    # temperature = [] Unused in the django version
-    # forecast = [] Unused in the django version
-    # temp_icon = [] Unused in the django version
     weather_dict = {}
     try:
         # Initial call and store of response
@@ -19,16 +14,12 @@ def weather():
         loop = 0
         # Periods is a time period as defined by NWS's API
         for period in json_response["properties"]["periods"]:
-            # Gather three periods of forecast data and append to previously defined list
+            # Gather four periods of forecast data and append to dictionary
             if period["number"] <= 4:
                 current_period = period["name"]
                 temp = period["temperature"]
                 short_forecast = period["shortForecast"]
                 pic = period["icon"]
-                # time_period.append(current_period)
-                # temperature.append(temp)
-                # forecast.append(short_forecast)
-                # temp_icon.append(pic)
                 weather_dict[loop] = {
                     "time_period": current_period,
                     "temperature": temp,
@@ -41,7 +32,12 @@ def weather():
         print("HTTP Request failed")
         print(err)
 
-    # Return built lists to be used in app.py
+    # Return built lists to be used in app.py, example data below
+    """ {0: {'time_period': 'Today', 'temperature': 94, 'forecast': 'Isolated Rain Showers then Chance Showers And Thunderstorms', 'temp_icon': 'https://api.weather.gov/icons/land/day/rain_showers,20/tsra_sct,50?size=medium'}, 
+         1: {'time_period': 'Tonight', 'temperature': 72, 'forecast': 'Chance Showers And Thunderstorms', 'temp_icon': 'https://api.weather.gov/icons/land/night/tsra_sct,50/tsra_sct,20?size=medium'}, 
+         2: {'time_period': 'Saturday', 'temperature': 92, 'forecast': 'Mostly Sunny then Slight Chance Showers And Thunderstorms', 'temp_icon': 'https://api.weather.gov/icons/land/day/sct/tsra_hi,20?size=medium'}, 
+         3: {'time_period': 'Saturday Night', 'temperature': 70, 'forecast': 'Chance Showers And Thunderstorms', 'temp_icon': 'https://api.weather.gov/icons/land/night/tsra_hi,30?size=medium'}} """
+
     return weather_dict
     # return time_period, temperature, forecast, temp_icon,
 
