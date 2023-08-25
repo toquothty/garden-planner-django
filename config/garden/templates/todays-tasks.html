@@ -8,7 +8,7 @@
 </section>
 
 <section class="flex-container">
-    {% for key, value in tasks.items() %}
+    {% for key, value in render_task_dict.items %}
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="card border border-dark">
             {% if value == "Direct" %}

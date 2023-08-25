@@ -15,7 +15,7 @@
     </title>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #91A395;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'garden.views.home'}">
+            <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg" alt="" width="34"
                     height="28" class="d-inline-block align-text-top">
                 VA Garden Planner
@@ -29,7 +29,7 @@
                     <a class="nav-link active" href="{% url 'home' %}">Home</a>
                     <a class="nav-link active" href="{% url 'list' %}">Vegetables</a>
                     <a class="nav-link active" aria-current="page" href="{% url 'forecast' %}">Forecast</a>
-                    <a class="nav-link active" href="{% url 'todays-tasks %}">Things to do</a>
+                    <a class="nav-link active" href="{% url 'todays-tasks' %}">Things to do</a>
                 </nav>
             </nav>
         </div>

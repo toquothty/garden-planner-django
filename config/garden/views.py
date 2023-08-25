@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from datetime import datetime, date
 from .models import Garden_DB
 from .core.weather import weather
 
@@ -60,13 +61,42 @@ def get_vegetable(request, get_vegetable):
 def forecast(request):
     # Utilize weather.py to grab the forecast for the next three time periods as defined by NWS
     weather_dict = weather()
-
     context = {"weather_dict": weather_dict}
 
-    # print(context)
     print(weather_dict)
     return render(request, "forecast.html", context)
 
 
-# def todays_tasks(request):
-#     return render(request, "todays-tasks")
+def todays_tasks(request):
+    today = date.today()
+
+    vegetable_list = Garden_DB.objects.order_by("vegetable").all()
+
+    render_task_dict = {}
+
+    for item in vegetable_list:
+        # Determine if sow type is Direct or Transplant
+        # Set variables to values from dictionary
+        sow_type = item.sow_type
+        if sow_type == "Direct":
+            window_start = item.sow_window_start
+            window_end = item.sow_window_end
+
+        else:
+            window_start = item.transplant_window_start
+            window_end = item.transplant_window_end
+
+        harvest_start = item.harvest_window_start
+        harvest_end = item.harvest_window_end
+
+        # Append to dictionary the sow type if in window
+        if window_start <= today <= window_end:
+            render_task_dict[item.vegetable] = sow_type
+
+        # Append to dictionary if in harvest window
+        elif harvest_start <= today <= harvest_end:
+            render_task_dict[item.vegetable] = "Harvest"
+
+    context = {"render_task_dict": render_task_dict}
+
+    return render(request, "todays-tasks.html", context)
